@@ -4,6 +4,39 @@ html
     link(href="client/main.css", rel="stylesheet")
   body
     h1= message
+    form
+      .form-group
+        .row
+          label(for="city-select") Select city
+          select(name="city-select")
+            option(value="Moscow",data-lon="37",data-lat="55") Moscow
+            option(value="Nijnii Novgorod" ,data-lon="44",data-lat="56") Nijnii Novgorod
+            option(value="Saint Petersburg" ,data-lon="30",data-lat="59") Saint Petersburg
+      
+      .form-group
+        .row
+          label Day count
+          .row-radio.row-radio__day-count
+            .row-radio__item
+              label(for="day-count") 1
+              input(type="radio", name="day-count", value="1", checked)
+            .row-radio__item
+              label(for="day-count") 3
+              input(type="radio", name="day-count", value="3")
+            .row-radio__item
+              label(for="day-count") 5
+              input(type="radio", name="day-count", value="5")
+
+      .form-group.form-group--widget-view
+        .row
+          label View widget
+          .row-radio
+            .row-radio__item
+              label(for="widget-view") vertical
+              input(type="radio", name="widget-view", value="vertical", checked)
+            .row-radio__item
+              label(for="widget-view") horizontal
+              input(type="radio", name="widget-view", value="horizontal")
     button#btn send request
     div.weather
       ul.weather-list

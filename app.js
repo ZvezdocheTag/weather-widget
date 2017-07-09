@@ -38,7 +38,6 @@ const prepareWeartherData = {
     },
 
     dayText: function(day) {
-        console.log(day)
         let parseDay = new Date(day);
         let getCurrent = parseDay.getDay();
         return this.dayOfWeekAsString(getCurrent)
@@ -64,7 +63,6 @@ const makeWeatherReq = (obj) => {
     request(reqWeather, (err, resp, body) => {
         if(!err && resp.statusCode === 200) {
             let result = JSON.parse(body);
-            // console.log(result)
             let date = prepareWeartherData.init(result.list)  
             res.send(date)
         } else{
@@ -74,6 +72,7 @@ const makeWeatherReq = (obj) => {
 } 
 
 app.get('/', function (req, res) {
+    
     request(requestUrldefault, (err, resp, body) => {
         if(!err && resp.statusCode === 200) {
             let result = JSON.parse(body);

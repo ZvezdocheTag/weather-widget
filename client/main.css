@@ -8,6 +8,19 @@ body {
     box-shadow: 0 1px 1px 0 rgba(178,178,178, .7);
     background: rgba(197,247,203, 1);
 }
+
+.weather.weather--horizontal {
+    width: 840px;
+}
+.weather--horizontal .weather-list {
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.weather--horizontal .weather-list__item {
+    margin-bottom: 0;
+
+}
 .weather-item {
     list-style: none;
     display: flex;
@@ -55,7 +68,13 @@ body {
     /*width: 80%;*/
 }
 .weather-list__item {
+    min-height: 110px;
     margin-bottom: 30px;
+    visibility: visible;
+}
+.weather-list__item.nodisplay {
+    /*display: none;*/
+    visibility: hidden;
 }
 .weather-item__value {
     width: 50%;
