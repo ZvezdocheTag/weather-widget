@@ -1,4 +1,3 @@
-// alert('HELLO')
 (function() {
     var sendData = function(lonData, latData) {
         var xhr = new XMLHttpRequest();
@@ -7,7 +6,7 @@
                 name: "Moscow",
                 lon: lonData,
                 lat: latData
-                });
+        });
 
         xhr.open('POST', '/city', true)
         xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8')
@@ -55,6 +54,50 @@
             })
         }
     }
+    var filterList = {
+        init: function() {
+            var controller = document.querySelector('.row-radio__day-count');
+            var controllerDefault = document.querySelector('.row-radio__day-count input[checked]').value;
+            var weatherList = document.querySelector('.weather-list');
+            var weatherListClone = weatherList.cloneNode(true);
+            var valueIsNumber = +controllerDefault;
+            
+            this.filterItems(valueIsNumber, weatherListClone)
+            var self = this;
+            controller.addEventListener('click', function(e) {
+                if(e.target.checked === true) {
+                    var val = +e.target.defaultValue;
+                    self.filterItems(val, weatherListClone)
+                }
+            })
+        },
+
+        filterItems: function(val, weatherListClone) {
+            var weatherList = document.querySelector('.weather-list');
+            var childrene = weatherList.children;
+            var cloneItem;
+            
+
+            if(childrene.length > val) {
+                for(var i = 0; childrene.length > val; i+=1 ) {
+                    childrene[childrene.length - 1].remove()
+                }
+
+            }
+            if(childrene.length < val) {
+                for(var k = 0; k < val; k+=1) {
+                    if(childrene.length + k !== val) {
+                        if(typeof weatherListClone.children[childrene.length] !== "undefined") {
+                            cloneItem = weatherListClone.children[childrene.length].cloneNode(true);
+                            weatherList.appendChild(cloneItem);
+                        }
+                    }
+                }
+                    
+            }
+            
+        }
+    }
 
     var citySelect = {
         init: function() {
@@ -66,36 +109,8 @@
                 var lat = selectedItem.dataset.lat;
             
                 sendData(lon, lat)
+                
             })
-        }
-    }
-
-    var filterList = {
-        init: function() {
-            var controller = document.querySelector('.row-radio__day-count');
-            var controllerDefault = document.querySelector('.row-radio__day-count input[checked]').value;
-            var valueIsNumber = +controllerDefault;
-            
-            this.filterItems(valueIsNumber)
-
-            controller.addEventListener('click', function(e) {
-                if(e.target.checked === true) {
-                    var val = +e.target.defaultValue;
-
-                }
-            })
-        },
-
-        filterItems: function(val) {
-            var weatherList = document.querySelector('.weather-list');
-            var childrene = weatherList.children;
-            
-            if(childrene.length !== val) {
-                console.log(childrene.length, childrene)
-                for(var i = 0; childrene.length > val; i+=1 ) {
-                    // childrene[childrene.length - 1].classList.add('nodisplay')
-                }
-            }
         }
     }
 
